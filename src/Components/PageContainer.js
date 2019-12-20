@@ -1,5 +1,9 @@
 import React from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { EditorState, RichUtils } from "draft-js";
+import Editor from "draft-js-plugins-editor";
+import createHighlightPlugin from "./plugins/highlightPlugin";
+
+const highlightPlugin = createHighlightPlugin();
 
 class PageContainer extends React.Component {
   constructor(props) {
@@ -7,6 +11,8 @@ class PageContainer extends React.Component {
     this.state = {
       editorState: EditorState.createEmpty()
     };
+
+    this.plugins = [highlightPlugin];
   }
 
   onChange = editorState => {
@@ -43,6 +49,12 @@ class PageContainer extends React.Component {
     );
   };
 
+  onHighlight = () => {
+    this.onChange(
+      RichUtils.toggleInlineStyle(this.state.editorState, "HIGHLIGHT")
+    );
+  };
+
   render() {
     return (
       <div className="editorContainer">
@@ -54,12 +66,16 @@ class PageContainer extends React.Component {
         </button>
         <button className="italic" onClick={this.onItalicClick}>
           <em>I</em>
-        </button>{" "}
+        </button>
+        <button className="highlight" onClick={this.onHighlight}>
+          <span style={{ padding: "0.3em" }}>H</span>
+        </button>
         <div className="editors">
           <Editor
             editorState={this.state.editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
+            plugins={this.plugins}
           />
         </div>
       </div>

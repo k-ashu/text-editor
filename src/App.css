@@ -30,6 +30,9 @@ button {
 button.underline {
   text-decoration: underline;
 }
+button.highlight {
+  background-color: yellow;
+}
 
 html {
   background-image: linear-gradient(to bottom, #0063b2ff 0%, #9cc3d5ff 100%);
