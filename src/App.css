@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+.editorContainer {
+  padding: 1em;
+  margin: 1em;
+}
+
+.editors {
+  border: 1px grey solid;
+  border-radius: 5px;
+  padding: 1em;
+  margin: 1em;
+  font-family: "Open Sans";
+  font-size: 90%;
+  background: white;
+}
+
+button {
+  border-radius: 2px;
+  margin: 0.25em;
+  width: 2.3em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
+  line-height: 200%;
+  border-radius: 3px;
+  background-color: #efefef;
+}
+
+button.underline {
+  text-decoration: underline;
+}
+
+html {
+  background-image: linear-gradient(to bottom, #0063b2ff 0%, #9cc3d5ff 100%);
+
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
