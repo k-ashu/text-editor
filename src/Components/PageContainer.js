@@ -2,7 +2,7 @@ import React from "react";
 import { EditorState, RichUtils } from "draft-js";
 import Editor from "draft-js-plugins-editor";
 import createHighlightPlugin from "./plugins/highlightPlugin";
-
+import insertCharacter from "../Utils/emojis";
 const highlightPlugin = createHighlightPlugin();
 
 class PageContainer extends React.Component {
@@ -13,6 +13,7 @@ class PageContainer extends React.Component {
     };
 
     this.plugins = [highlightPlugin];
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange = editorState => {
@@ -55,6 +56,11 @@ class PageContainer extends React.Component {
     );
   };
 
+  onEmojiClick = e => {
+    let emoji = e.currentTarget.getAttribute("data-emoji");
+    this.onChange(insertCharacter(emoji, this.state.editorState));
+  };
+
   render() {
     return (
       <div className="editorContainer">
@@ -70,6 +76,39 @@ class PageContainer extends React.Component {
         <button className="highlight" onClick={this.onHighlight}>
           <span style={{ padding: "0.3em" }}>H</span>
         </button>
+        <div className="emoji-picker">
+          <h2 className="toolbar-title">Insert Emoji:</h2>
+          <button
+            className="emoji"
+            onMouseDown={e => e.preventDefault()}
+            onClick={this.onEmojiClick}
+            data-emoji="🎊"
+          >
+            <span role="img" aria-label="confetti">
+              🎊
+            </span>
+          </button>
+          <button
+            className="emoji"
+            onMouseDown={e => e.preventDefault()}
+            onClick={this.onEmojiClick}
+            data-emoji="💖"
+          >
+            <span role="img" aria-label="sparkle heart">
+              💖
+            </span>
+          </button>
+          <button
+            className="emoji"
+            onMouseDown={e => e.preventDefault()}
+            onClick={this.onEmojiClick}
+            data-emoji="🌼"
+          >
+            <span role="img" aria-label="yellow flower">
+              🌼
+            </span>
+          </button>
+        </div>
         <div className="editors">
           <Editor
             editorState={this.state.editorState}
